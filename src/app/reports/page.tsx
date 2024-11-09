@@ -29,11 +29,11 @@ const  Report = () => {
           onChange={handleSelectChange}
           className="px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-900 shadow-sm focus:ring-blue-500 focus:border-blue-500"
         >
-          <option value="product" className="cursor-pointer">Report Product</option>
-          <option value="staff" className="cursor-pointer">Report Staff</option>
-          <option value="bill" className="cursor-pointer">Report Bill</option>
-          <option value="transaction" className="cursor-pointer">Report Transaction</option>
-          <option value="shift" className="cursor-pointer">Report Shift</option>
+          <option value="product" className="cursor-pointer">Báo cáo kho</option>
+          <option value="staff" className="cursor-pointer">Báo cáo nhân viên</option>
+          <option value="bill" className="cursor-pointer">Báo cáo doanh thu</option>
+          <option value="transaction" className="cursor-pointer">Báo cáo chi tiêu</option>
+          <option value="shift" className="cursor-pointer">Báo cáo ca làm</option>
         </select>
       </div>
       <div>

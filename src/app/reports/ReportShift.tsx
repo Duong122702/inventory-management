@@ -13,11 +13,6 @@ function getDayOfWeek(dateString: string) {
   return ((date.getUTCDay() + 6) % 7) + 1; // Return Monday (1) to Sunday (7)
 }
 
-function mapShiftIdToCa(shiftId: number, shifts: any[]) {
-  const shift = shifts?.find((s) => s.shift_id === shiftId);
-  return shift ? shift.name : null;
-}
-
 const ReportShift = () => {
   const [exporting, setExporting] = useState(false); // Track export state
 
@@ -47,7 +42,7 @@ const ReportShift = () => {
     staffWorkTimes.forEach((staff) => {
       staff.shifts.forEach((shift) => {
         const dayOfWeek = getDayOfWeek(shift.date);
-        const shiftName = mapShiftIdToCa(shift.staff_shift_id, shifts);
+        const shiftName = shift.shift_name;
 
         if (dayOfWeek && shiftName) {
           const cellKey = `${shiftName}-thu${dayOfWeek}`;
@@ -126,8 +121,9 @@ const ReportShift = () => {
             {[1, 2, 3, 4, 5, 6, 7].map((day) => {
               const cellKey = `${shift.name}-thu${day}`;
               return (
-                <td key={cellKey} className="border px-4 py-2 text-center">
-                  {(schedule[cellKey] || []).join(', ')}
+                <td key={cellKey} className="border px-4 py-2 text-center"
+                style={{whiteSpace: "pre-line"}}>
+                  {(schedule[cellKey] || []).join("\n")}
                 </td>
               );
             })}
@@ -142,7 +138,7 @@ const ReportShift = () => {
             <thead>
                 <tr>
                     <th className="border px-4 py-2 text-center">Tên</th>
-                    <th className="border px-4 py-2 text-center">Số điện thoại</th>
+                    {/* <th className="border px-4 py-2 text-center">Số điện thoại</th> */}
                     <th className="border px-4 py-2 text-center">Số lượng ca làm</th>
                 </tr>
             </thead>
@@ -150,7 +146,6 @@ const ReportShift = () => {
                     {staffWorkTimes.map((staff) => (
                         <tr key={staff.staff_id}>
                             <td className="border px-4 py-2 text-center">{staff.name}</td>
-                            <td className="border px-4 py-2 text-center">{staff.phone}</td>
                             <td className="border px-4 py-2 text-center">{staff.shifts.length}</td>
                     </tr>
                     ))}
